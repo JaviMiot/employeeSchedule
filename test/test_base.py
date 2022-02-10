@@ -19,6 +19,11 @@ class TestBase(unittest.TestCase):
         self.service = ScheduleEmployee('fakerData.txt')
         self.employees = self.service.getEmployees()
 
+    def test_error_incorrect_path_file(self):
+        serviceFail = ScheduleEmployee('sdsd')
+        employeesFail = serviceFail.getEmployees()
+        self.assertEqual(employeesFail, 'File Not Found')
+
     def test_read_file_txt(self):
         employees = self.employees
 
