@@ -12,15 +12,18 @@ class ScheduleEmployee:
         self.employees = list()
 
     def getEmployees(self):
-        with open(self.path, 'r') as file:
-            for line in file.readlines():
-                line = self.__cleanData(line)
-                name, scheduleStr = self.__getNameAndSchedule(line)
+        try:
+            with open(self.path, 'r') as file:
+                for line in file.readlines():
+                    line = self.__cleanData(line)
+                    name, scheduleStr = self.__getNameAndSchedule(line)
 
-                if name is not None and scheduleStr is not None:
-                    schedule_generated = self.__generateSchedule(scheduleStr)
-                    employee = Employee(name, schedule_generated)
-                    self.employees.append(employee)
+                    if name is not None and scheduleStr is not None:
+                        schedule_generated = self.__generateSchedule(scheduleStr)
+                        employee = Employee(name, schedule_generated)
+                        self.employees.append(employee)
+        except FileNotFoundError:
+            return 'File Not Found'
 
         return self.employees
 
