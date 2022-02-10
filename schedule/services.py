@@ -50,4 +50,3 @@ class ScheduleEmployee:
             schedule.addDay(day)
 
         return schedule
-
