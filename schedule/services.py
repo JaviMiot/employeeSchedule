@@ -69,7 +69,6 @@ class ScheduleEmployee:
 
         dataOut = reduce(
             lambda a, b: f'{a}{b[0]}: {b[1]}\n',  list(results.items()), '')
-        print(dataOut)
         return dataOut
 
     def __countCoincidend(self, employee, nextEmployee):

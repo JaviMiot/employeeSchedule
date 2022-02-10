@@ -218,9 +218,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-fakerData2.txt
-fakerData3.txt
-fakerDataAll.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,windows,python
 
