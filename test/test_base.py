@@ -14,9 +14,10 @@ ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
 
 
 class TestBase(unittest.TestCase):
-
-    service = ScheduleEmployee('fakerData.txt')
-    employees = service.getEmployees()
+    @classmethod
+    def setUpClass(self):
+        self.service = ScheduleEmployee('fakerData.txt')
+        self.employees = self.service.getEmployees()
 
     def test_read_file_txt(self):
         employees = self.employees
@@ -70,3 +71,27 @@ class TestBase(unittest.TestCase):
         # ? day2: 12:00 - 14:00
         day2 = DayOfWork('MO', datetime.time(12, 0), datetime.time(14, 0))
         self.assertTrue(matchRangeTime(day1, day2))
+
+    def test_employees_coincided_in_the_office(self):
+        """
+        RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00- 21:00
+        ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
+        ANDRES=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
+        """
+        service_test = ScheduleEmployee('fakerData3.txt')
+        employees_test = service_test.getEmployees()
+        coincidedInOffice = service_test.getCoincidedInOffice()
+
+        self.assertEqual(coincidedInOffice,
+                         'RENE-ASTRID: 2\nRENE-ANDRES: 2\nASTRID-ANDRES: 3\n')
+
+        """
+        RENE=MO10:15-12:00,TU10:00-12:00,TH13:00-13:15,SA14:00-18:00,SU20:00-21:00
+        ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
+        """
+        service_test2 = ScheduleEmployee('fakerDataAll.txt')
+        employees_test2 = service_test2.getEmployees()
+        coincidedInOffice2 = service_test2.getCoincidedInOffice()
+
+        self.assertEqual(coincidedInOffice2,
+                         'RENE-ASTRID: 3\n')
