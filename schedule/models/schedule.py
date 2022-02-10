@@ -1,10 +1,10 @@
 from schedule.models.dayOfWork import DayOfWork
 
+
 class Schedule:
-    days = dict()
+
+    def __init__(self):
+        self.days = {}
 
     def addDay(self, day: DayOfWork):
         self.days[day.nameOfDay] = day
-
-    def getDaysNames(self):
-        return self.days.keys()
