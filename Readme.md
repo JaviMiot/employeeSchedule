@@ -10,6 +10,12 @@
 _Acerca del proyecto_
 Linea de comandos para obtener una lista de empleados que coinciden con el mismo horario en la oficina.
 
+## Solución🚀
+Para la solución se considero usar una linea de comandos donde el usuario pueda ingresar el nombre del archivo .txt y  el formato de salida de los datos. Esta última opción se consideró implementarla debido a que se puede agregar funcionalidades como exportar los datos a un pdf, excel o cualquier tipo de formato.
+
+Se empezó por definir las pruebas unitarias deacuerdo a los datos de prueba que tenia el ejercicio.
+
+
 ## Caracteristicas📋
 1. Ejecución por linea de comandos
 2. Salida en formato String, diccionario y pipe.
