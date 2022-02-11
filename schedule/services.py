@@ -2,8 +2,15 @@ import datetime
 from schedule.models import Employee, Schedule, DayOfWork
 from schedule.config import Config
 from schedule.utils import matchRangeTime
+from schedule.transformData import TransformContext, TransformToString, TransformToDict, TransformToPipe
 
-from functools import reduce
+from enum import Enum
+
+
+class FormatType():
+    Dict = 'dict'
+    Pipe = 'pipe'
+
 
 class ScheduleEmployee:
 
@@ -19,7 +26,8 @@ class ScheduleEmployee:
                     name, scheduleStr = self.__getNameAndSchedule(line)
 
                     if name is not None and scheduleStr is not None:
-                        schedule_generated = self.__generateSchedule(scheduleStr)
+                        schedule_generated = self.__generateSchedule(
+                            scheduleStr)
                         employee = Employee(name, schedule_generated)
                         self.employees.append(employee)
         except FileNotFoundError:
@@ -58,7 +66,7 @@ class ScheduleEmployee:
         return datetime.time(
             int(stringTime.split(':')[0]), int(stringTime.split(':')[1]))
 
-    def getCoincidedInOffice(self):
+    def getCoincidedInOffice(self, formatType: str = None):
         totalEmployees = len(self.employees) - 1
         results = {}
 
@@ -70,8 +78,14 @@ class ScheduleEmployee:
                         employee, nextEmployee)
                     results[f'{employee.name}-{nextEmployee.name}'] = countCoincidend
 
-        dataOut = reduce(
-            lambda a, b: f'{a}{b[0]}: {b[1]}\n',  list(results.items()), '')
+        transform = TransformContext(TransformToString())
+
+        if formatType == FormatType.Dict:
+            transform.strategy = TransformToDict()
+        elif formatType == FormatType.Pipe:
+            transform.strategy = TransformToPipe()
+
+        dataOut = transform.execute(results)
         return dataOut
 
     def __countCoincidend(self, employee, nextEmployee):
