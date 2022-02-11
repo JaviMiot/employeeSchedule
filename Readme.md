@@ -35,7 +35,11 @@ Linea de comandos para obtener una lista de empleados que coinciden con el mismo
 
 Clonar el repositorio
 ```shell
-https://github.com/JaviMiot/employeeSchedule.git
+git clone https://github.com/JaviMiot/employeeSchedule.git
+```
+Ingresar a la carpeta del proyecto
+```shell
+cd employeeSchedule/
 ```
 
 Crear un ambiente virtual
