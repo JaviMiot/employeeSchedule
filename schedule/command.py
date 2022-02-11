@@ -16,7 +16,7 @@ def schedule():
               help='The file .txt with employees schedule')
 @click.option('-ft', '--format',
               type=str, prompt=False, default=None,
-              help='Output format, Can use dict, pipe. Default is string')
+              help='Output format, Can use dict = dictionary, pipe = pipe. Default is string')
 def coincided(file, format):
     service = ScheduleEmployee(file)
     employees = service.getEmployees()
