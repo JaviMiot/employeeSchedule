@@ -1,6 +1,6 @@
 
 <div  align="center">
-	<h1  style="text-align: center">Command Line Schedule Employees</h1>
+	<h1  style="text-align: center">Command Line Employees Schedule</h1>
 </div>
 
 <div align="center" >
